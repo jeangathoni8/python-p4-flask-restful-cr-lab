@@ -8,13 +8,13 @@ class TestPlant:
 
     def test_can_instantiate(self):
         '''can be instantiated with a name.'''
-        p = Plant(name="Douglas Fir")
+        p = Plant(name="Douglas Fir", image="example.jpg", price=15.99)
         assert(p)
     
     def test_can_be_created(self):
         '''can create records that can be committed to the database.'''
         with app.app_context():
-            p = Plant(name="Douglas Fir")
+            p = Plant(name="Douglas Fir", image="example.jpg", price=15.99)
             db.session.add(p)
             db.session.commit()
             assert(p.id)
@@ -31,7 +31,7 @@ class TestPlant:
     def test_can_be_serialized(self):
         '''can create records with a to_dict() method for serialization.'''
         with app.app_context():
-            p = Plant(name="Douglas Fir")
+            p = Plant(name="Douglas Fir", image="example.jpg", price=15.99)
             db.session.add(p)
             db.session.commit()
             p_dict = Plant.query.filter_by(name="Douglas Fir").first().to_dict()
@@ -39,3 +39,4 @@ class TestPlant:
         
             db.session.delete(p)
             db.session.commit()
+
